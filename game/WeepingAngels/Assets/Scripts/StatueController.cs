@@ -5,52 +5,47 @@ public class StatueController : MonoBehaviour
 {
     public Transform player;
     public NavMeshAgent agent;
-    public float stepInterval = 2f;   // time between jumps
-    public float stepDistance = 1f;   // length of each jump
+    public FlashlightDetector flashlight;   // <--- CONNECT THIS IN THE INSPECTOR
 
-    bool isFrozen = false;
-    float stepTimer = 0f;
+    public float stepInterval = 2f;   // time between jumps
+    public float stepDistance = 1f;   // distance per jump
+
+    private float stepTimer = 0f;
 
     void Start()
     {
         if (agent != null)
-            agent.updatePosition = false;  // we control movement manually
+            agent.updatePosition = false;  // We manually control movement
     }
 
     void Update()
     {
-        if (isFrozen)
+        // ----------------------------------------------------
+        // FREEZE LOGIC — statue is in the flashlight cone
+        // ----------------------------------------------------
+        if (flashlight != null && flashlight.IsSeeingStatue)
         {
             agent.isStopped = true;
-            return;
+            return;   // stop all movement
+        }
+        else
+        {
+            agent.isStopped = false;
         }
 
-        // Timer logic for choppy movement
+        // ----------------------------------------------------
+        // CHOPPY MOVEMENT LOGIC
+        // ----------------------------------------------------
         stepTimer += Time.deltaTime;
 
         if (stepTimer >= stepInterval)
         {
             stepTimer = 0f;
 
-            // Move in a single "jump" toward the player
             Vector3 direction = (player.position - transform.position).normalized;
             Vector3 destination = transform.position + (direction * stepDistance);
 
-            agent.Warp(destination);  // instant teleport
-        }
-    }
-
-    public void SetFrozen(bool value)
-    {
-        isFrozen = value;
-
-        if (isFrozen)
-        {
-            agent.isStopped = true;
-        }
-        else
-        {
-            agent.isStopped = false;
+            agent.Warp(destination); // instant "jump"
         }
     }
 }
