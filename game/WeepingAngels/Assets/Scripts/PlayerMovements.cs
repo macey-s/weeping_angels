@@ -15,7 +15,7 @@ public class PlayerMovements : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
 
-        // Automatically assign if missed
+  
         if (controller == null)
             controller = GetComponent<CharacterController>();
     }
@@ -33,10 +33,10 @@ public class PlayerMovements : MonoBehaviour
 
         Vector3 move = (transform.right * x) + (transform.forward * z);
 
-        // CharacterController handles collisions AUTOMATICALLY
+        // handle collisions
         controller.Move(move * moveSpeed * Time.deltaTime);
 
-        // Apply gravity
+        // gravity
         if (!controller.isGrounded)
             velocity.y += Physics.gravity.y * Time.deltaTime;
         else
@@ -50,10 +50,10 @@ public class PlayerMovements : MonoBehaviour
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
-        // Rotate body left/right
+        // rotate body left/right
         transform.Rotate(Vector3.up * mouseX);
 
-        // Rotate camera up/down
+        // rotate camera up/down
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -80f, 80f);
 
