@@ -1,5 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 --- !u!114 &-1940803430050401392
 MonoBehaviour:
@@ -16,6 +17,8 @@ MonoBehaviour:
   version: 10
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> main
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
@@ -136,6 +139,7 @@ Material:
     - _XRMotionVectorsPass: 1
     - _ZWrite: 0
     m_Colors:
+<<<<<<< HEAD
 <<<<<<< Updated upstream
     - _BaseColor: {r: 0.8773585, g: 0.8387234, b: 0.6497419, a: 1}
     - _Color: {r: 0.8773585, g: 0.8387234, b: 0.6497418, a: 1}
@@ -143,12 +147,19 @@ Material:
     - _BaseColor: {r: 1, g: 0.94552207, b: 0.6084906, a: 1}
     - _Color: {r: 1, g: 0.945522, b: 0.6084906, a: 1}
 >>>>>>> Stashed changes
+=======
+    - _BaseColor: {r: 1, g: 0.94552207, b: 0.6084906, a: 1}
+    - _Color: {r: 1, g: 0.945522, b: 0.6084906, a: 1}
+>>>>>>> main
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
+=======
+>>>>>>> main
 --- !u!114 &6952800503998550059
 MonoBehaviour:
   m_ObjectHideFlags: 11
@@ -162,4 +173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Editor::UnityEditor.Rendering.Universal.AssetVersion
   version: 10
+<<<<<<< HEAD
 >>>>>>> Stashed changes
+=======
+>>>>>>> main
