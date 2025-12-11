@@ -3,23 +3,45 @@ using UnityEngine.AI;
 
 public class StatueController : MonoBehaviour
 {
+    [Header("References")]
     public Transform player;
     public NavMeshAgent agent;
+<<<<<<< Updated upstream
     public FlashlightDetector flashlight;   // <--- CONNECT THIS IN THE INSPECTOR
 
     public float stepInterval = 2f;   // time between jumps
     public float stepDistance = 1f;   // distance per jump
 
     private float stepTimer = 0f;
+=======
+
+    [Header("Movement Settings")]
+    public float stepInterval = 2f;
+    public float stepDistance = 2f;
+
+    [Header("Light Reaction Settings")]
+    public float postLightCooldown = 1.5f; // how long after leaving the light before moving again
+
+    private bool isFrozen = false;
+    private float stepTimer = 0f;
+    private float cooldownTimer = 0f;
+>>>>>>> Stashed changes
 
     void Start()
     {
         if (agent != null)
+<<<<<<< Updated upstream
             agent.updatePosition = false;  // We manually control movement
+=======
+        {
+            agent.updatePosition = true;
+        }
+>>>>>>> Stashed changes
     }
 
     void Update()
     {
+<<<<<<< Updated upstream
         // ----------------------------------------------------
         // FREEZE LOGIC — statue is in the flashlight cone
         // ----------------------------------------------------
@@ -31,11 +53,32 @@ public class StatueController : MonoBehaviour
         else
         {
             agent.isStopped = false;
+=======
+        // do nothing
+        if (isFrozen || cooldownTimer > 0f)
+        {
+            if (!isFrozen)
+                cooldownTimer -= Time.deltaTime;
+
+            if (agent != null)
+                agent.isStopped = true;
+
+            return;
+>>>>>>> Stashed changes
+        }
+        else
+        {
+            if (agent != null)
+                agent.isStopped = false;
         }
 
+<<<<<<< Updated upstream
         // ----------------------------------------------------
         // CHOPPY MOVEMENT LOGIC
         // ----------------------------------------------------
+=======
+        // movement
+>>>>>>> Stashed changes
         stepTimer += Time.deltaTime;
 
         if (stepTimer >= stepInterval)
@@ -43,9 +86,31 @@ public class StatueController : MonoBehaviour
             stepTimer = 0f;
 
             Vector3 direction = (player.position - transform.position).normalized;
-            Vector3 destination = transform.position + (direction * stepDistance);
+            Vector3 targetPosition = transform.position + direction * stepDistance;
 
+<<<<<<< Updated upstream
             agent.Warp(destination); // instant "jump"
         }
+=======
+            if (NavMesh.SamplePosition(targetPosition, out NavMeshHit hit, 1.0f, NavMesh.AllAreas))
+            {
+                agent.Warp(hit.position);
+            }
+        }
+    }
+
+    public void SetFrozen(bool value)
+    {
+        // if just unfrozen > start cooldown
+        if (isFrozen && !value)
+        {
+            cooldownTimer = postLightCooldown;
+        }
+
+        isFrozen = value;
+
+        if (agent != null)
+            agent.isStopped = value;
+>>>>>>> Stashed changes
     }
 }
